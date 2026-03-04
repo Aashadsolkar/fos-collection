@@ -9,28 +9,22 @@ import OfflineBanner from "./src/components/OfflineBanner";
 import { DashboardProvider } from "./src/context/DashboardContext";
 import { AllocationProvider } from "./src/context/AllocationContext";
 import { AuthProvider } from "./src/context/AuthContext";
+import { DispositionProvider } from "./src/context/DispositionContext";
 
 export default function App() {
-  console.log("AuthProvider:", AuthProvider);
-console.log("ErrorProvider:", ErrorProvider);
-console.log("LoaderProvider:", LoaderProvider);
-console.log("NetworkProvider:", NetworkProvider);
-console.log("DashboardProvider:", DashboardProvider);
-console.log("AllocationProvider:", AllocationProvider);
-console.log("GlobalLoader:", GlobalLoader);
-console.log("OfflineBanner:", OfflineBanner);
-console.log("RootNavigator:", RootNavigator);
   return (
     <AuthProvider>
       <ErrorProvider>
         <LoaderProvider>
           <NetworkProvider>
             <DashboardProvider>
-              <AllocationProvider>
-                <NavigationContainer>
-                  <RootNavigator />
-                </NavigationContainer>
-              </AllocationProvider>
+              <DispositionProvider>
+                <AllocationProvider>
+                  <NavigationContainer>
+                    <RootNavigator />
+                  </NavigationContainer>
+                </AllocationProvider>
+              </DispositionProvider>
             </DashboardProvider>
             <GlobalLoader />
             <OfflineBanner />
