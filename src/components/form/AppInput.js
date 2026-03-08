@@ -16,6 +16,7 @@ export default function AppInput({
   secureTextEntry,
   toggleSecure,
   error,
+  editable = true
 }) {
   return (
     <View style={styles.wrapper}>
@@ -29,6 +30,7 @@ export default function AppInput({
           placeholderTextColor="#666"
           secureTextEntry={secureTextEntry}
           style={styles.input}
+          editable={editable}
         />
 
         {toggleSecure && (

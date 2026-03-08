@@ -5,7 +5,7 @@ const AllocationContext = createContext();
 
 export const AllocationProvider = ({ children }) => {
   const [allocations, setAllocations] = useState([]);
-  const [filter, setFilter] = useState("today");
+  const [filter, setFilter] = useState("this_month");
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(null);
 
@@ -16,8 +16,9 @@ export const AllocationProvider = ({ children }) => {
   ) => {
     try {
       const res = await getAllocationsApi({
-        filter: selectedFilter,
         page: pageNo,
+        per_page: 10,
+        period: selectedFilter,
       });
 
       const items = res?.data?.data?.items || [];

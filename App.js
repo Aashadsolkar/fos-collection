@@ -10,6 +10,10 @@ import { DashboardProvider } from "./src/context/DashboardContext";
 import { AllocationProvider } from "./src/context/AllocationContext";
 import { AuthProvider } from "./src/context/AuthContext";
 import { DispositionProvider } from "./src/context/DispositionContext";
+import { DispositionDetailsProvider } from "./src/context/DispositionDetailsContext";
+import { NotificationProvider } from "./src/context/NotificationContext";
+import { DispositionFormProvider } from "./src/context/DispositionFormContext";
+import { ChangePasswordProvider } from "./src/context/ChangePasswordContext";
 
 export default function App() {
   return (
@@ -17,17 +21,25 @@ export default function App() {
       <ErrorProvider>
         <LoaderProvider>
           <NetworkProvider>
-            <DashboardProvider>
-              <DispositionProvider>
-                <AllocationProvider>
-                  <NavigationContainer>
-                    <RootNavigator />
-                  </NavigationContainer>
-                </AllocationProvider>
-              </DispositionProvider>
-            </DashboardProvider>
+            <ChangePasswordProvider>
+            <NotificationProvider>
+              <DashboardProvider>
+                <DispositionProvider>
+                  <AllocationProvider>
+                    <DispositionDetailsProvider>
+                      <DispositionFormProvider>
+                        <NavigationContainer>
+                          <RootNavigator />
+                        </NavigationContainer>
+                      </DispositionFormProvider>
+                    </DispositionDetailsProvider>
+                  </AllocationProvider>
+                </DispositionProvider>
+              </DashboardProvider>
+            </NotificationProvider>
             <GlobalLoader />
             <OfflineBanner />
+            </ChangePasswordProvider>
           </NetworkProvider>
         </LoaderProvider>
       </ErrorProvider>

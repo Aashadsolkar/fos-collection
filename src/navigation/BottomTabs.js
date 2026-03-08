@@ -11,7 +11,9 @@ const Tab = createBottomTabNavigator();
 
 export default function BottomTabs() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={{
+        headerShown: false,
+      }}>
       <Tab.Screen name="Dashboard" component={DashboardScreen} />
       <Tab.Screen name="Allocation" component={AllocationScreen} />
       <Tab.Screen name="Disposition" component={DispositionScreen} />

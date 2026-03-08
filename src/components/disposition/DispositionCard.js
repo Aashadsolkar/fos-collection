@@ -1,8 +1,8 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function DispositionCard({ item }) {
+export default function DispositionCard({ item, onPress }) {
   const masked = "************" + item.account_no?.slice(-4);
 
   const getStatusStyle = () => {
@@ -28,13 +28,13 @@ export default function DispositionCard({ item }) {
 
       <View style={styles.rowBetween}>
         <Text style={styles.account}>{masked}</Text>
-        <Ionicons name="chevron-down" size={18} />
-      </View>
-
-      <View style={styles.badgeContainer}>
         <Text style={[styles.badge, getStatusStyle()]}>
           {item.disposition}
         </Text>
+      </View>
+
+      <View style={styles.badgeContainer}>
+        <TouchableOpacity onPress={onPress} style={{ backgroundColor: "#F9D75D", paddingHorizontal: 10, paddingVertical: 5, borderRadius: 50 }}><Text style={{ fontWeight: 600 }}>View Details</Text></TouchableOpacity>
       </View>
     </View>
   );
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     color: "#777",
   },
   badgeContainer: {
-    marginTop: 8,
+    marginTop: 15,
     alignItems: "flex-end",
   },
   badge: {

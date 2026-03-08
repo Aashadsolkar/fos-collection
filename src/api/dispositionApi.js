@@ -10,3 +10,13 @@ export const getDispositionsApi = ({
     url: `/dispositions?page=${page}&per_page=${per_page}&period=${period}`,
   });
 };
+
+export const createDispositionApi = ({
+  payload
+}) => {
+  return apiRequest({
+    method: "POST",
+    url: `/dispositions`,
+    data: payload
+  });
+};

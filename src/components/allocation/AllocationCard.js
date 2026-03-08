@@ -29,8 +29,8 @@ export default function AllocationCard({ item, onPress }) {
       </View>
 
       <TouchableOpacity style={styles.viewButton} onPress={onPress}>
-        <Text style={styles.viewText}>View</Text>
-        <Ionicons name="chevron-down" size={16} color="#000" />
+        <Text style={styles.viewText}>View Details</Text>
+        {/* <Ionicons name="chevron-up" size={16} color="#000" /> */}
       </TouchableOpacity>
     </View>
   );

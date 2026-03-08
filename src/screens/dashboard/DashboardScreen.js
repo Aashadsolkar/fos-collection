@@ -12,6 +12,7 @@ import SummaryCard from "../../components/dashboard/SummaryCard";
 import StatsGrid from "../../components/dashboard/StatsGrid";
 import AppHeader from "../../components/common/AppHeader";
 import { useDashboard } from "../../context/DashboardContext";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function DashboardScreen() {
   const {
@@ -40,51 +41,51 @@ export default function DashboardScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <AppHeader
-        title="Dashboard"
-        showDrawer
-        onRightPress={() => setShowFilter(prev => !prev)}
-      />
+    <>
+      <SafeAreaView edges={["top"]} style={{ backgroundColor: "#FFF" }}></SafeAreaView>
+      <SafeAreaView edges={[]}>
+        <AppHeader title={"Dashboard"} showDrawer={true} />
+        <View style={styles.container}>
 
-      <DashboardHeader
-        onFilterPress={() => setShowFilter(prev => !prev)}
-      />
-
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
+          <DashboardHeader
+            onFilterPress={() => setShowFilter(prev => !prev)}
           />
-        }
-      >
-        {showFilter && (
-          <PeriodFilter
-            period={period}
-            setPeriod={setPeriod}
-            setCustomDate={setCustomDate}
-          />
-        )}
 
-        {summary && (
-          <>
-            <SummaryCard
-              title="Today's Total Allocation"
-              value={summary.total_allocations}
-            />
-            <StatsGrid summary={summary} />
-          </>
-        )}
-      </ScrollView>
-    </View>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={onRefresh}
+              />
+            }
+          >
+            {showFilter && (
+              <PeriodFilter
+                period={period}
+                setPeriod={setPeriod}
+                setCustomDate={setCustomDate}
+              />
+            )}
+
+            {summary && (
+              <>
+                <SummaryCard
+                  title="Today's Total Allocation"
+                  value={summary.total_allocations}
+                />
+                <StatsGrid summary={summary} />
+              </>
+            )}
+          </ScrollView>
+        </View>
+      </SafeAreaView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#F4F4F4",
     paddingHorizontal: 16,
   },

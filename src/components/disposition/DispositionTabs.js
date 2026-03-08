@@ -3,8 +3,8 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
 export default function DispositionTabs({ period, setPeriod }) {
   const tabs = [
-    { label: "All", value: "" },
-    { label: "Today", value: "yesterday" },
+    { label: "All", value: "all" },
+    { label: "Today", value: "today" },
     { label: "This Week", value: "this_week" },
     { label: "This Month", value: "this_month" },
   ];

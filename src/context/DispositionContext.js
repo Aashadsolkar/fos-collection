@@ -5,7 +5,7 @@ const DispositionContext = createContext();
 
 export const DispositionProvider = ({ children }) => {
   const [items, setItems] = useState([]);
-  const [period, setPeriod] = useState("yesterday");
+  const [period, setPeriod] = useState("all");
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(null);
 

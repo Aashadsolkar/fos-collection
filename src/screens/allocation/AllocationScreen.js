@@ -9,6 +9,8 @@ import {
 
 import AllocationCard from "../../components/allocation/AllocationCard";
 import { useAllocation } from "../../context/AllocationContext";
+import { SafeAreaView } from "react-native-safe-area-context";
+import AppHeader from "../../components/common/AppHeader";
 
 export default function AllocationScreen({ navigation }) {
   const {
@@ -31,7 +33,11 @@ export default function AllocationScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
+   <>
+   <SafeAreaView edges={["top"]} style={{backgroundColor: "#fff"}}></SafeAreaView>
+   <SafeAreaView edges={[]}>
+    <AppHeader title={"Allocation"}/>
+     <View style={styles.container}>
       <FlatList
         data={allocations}
         keyExtractor={(item) => item.id.toString()}
@@ -39,7 +45,9 @@ export default function AllocationScreen({ navigation }) {
           <AllocationCard
             item={item}
             onPress={() =>
-              navigation.navigate("AllocationDetail", { data: item })
+              navigation.navigate("AllocationDetails", {
+                id: item.id
+              })
             }
           />
         )}
@@ -55,12 +63,13 @@ export default function AllocationScreen({ navigation }) {
         }
       />
     </View>
+   </SafeAreaView>
+   </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 16,
     backgroundColor: "#f5f5f5",
   },
