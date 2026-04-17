@@ -48,7 +48,8 @@ export const AuthProvider = ({ children }) => {
     // ===============================
     const login = async (employee_code, password) => {
         const res = await loginApi(employee_code, password);
-
+        console.log("login success", res);
+        
         if (res.success && res.data?.status === "success") {
             const accessToken = res.data.data.access_token;
             const userData = res.data.data.user;

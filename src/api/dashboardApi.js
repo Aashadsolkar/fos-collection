@@ -7,6 +7,6 @@ export const getDashboardSummary = async ({ period, date }) => {
   return await apiRequest({
     method: "GET",
     url: "/home",
-    params: date ? { date } : { period },
+    params: {start_date: date, end_date: date},
   });
 };

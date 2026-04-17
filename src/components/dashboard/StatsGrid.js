@@ -1,26 +1,32 @@
 // src/components/dashboard/StatsGrid.js
 
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
 
-export default function StatsGrid({ summary }) {
+export default function StatsGrid({ summary, date }) {
+  const navigation = useNavigation()
   const stats = [
     {
       label: "Untouched Data",
       value: summary.untouched_allocations,
+      onPress: () => navigation.navigate("Allocation")
     },
     {
-      label: "Today's Disposition",
+      label: `${date}'s Disposition`,
       value: summary.today_dispositions,
+      onPress: () => navigation.navigate("Allocation")
     },
     {
       label: "Overall Disposition",
       value: summary.overall_dispositions,
+      onPress: () => navigation.navigate("Disposition")
     },
     {
       label: "Total Disposition",
       value: summary.total_dispositions,
+      onPress: () => navigation.navigate("Allocation")
     },
   ];
 
@@ -32,8 +38,10 @@ export default function StatsGrid({ summary }) {
           colors={["#F9E79F", "#F4C400"]}
           style={styles.card}
         >
-          <Text style={styles.label}>{item.label}</Text>
-          <Text style={styles.value}>{item.value}</Text>
+          <TouchableOpacity onPress={item.onPress}>
+            <Text style={styles.label}>{item.label}</Text>
+            <Text style={styles.value}>{item.value}</Text>
+          </TouchableOpacity>
         </LinearGradient>
       ))}
     </View>

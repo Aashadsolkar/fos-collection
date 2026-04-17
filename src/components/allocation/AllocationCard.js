@@ -12,7 +12,7 @@ export default function AllocationCard({ item, onPress }) {
     <View style={styles.card}>
       <View style={styles.leftSection}>
         <Text style={styles.title}>
-          {payload.PRESENT_ADD_CITY?.toUpperCase() || "N/A"}
+          {payload.NAME_OF_CUSTOMER?.toUpperCase() || "N/A"}
         </Text>
 
         <Text style={styles.account}>

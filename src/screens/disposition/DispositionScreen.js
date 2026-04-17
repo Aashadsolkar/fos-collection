@@ -37,7 +37,7 @@ export default function DispositionScreen({ navigation }) {
   return (
     <>
       <SafeAreaView edges={["top"]} style={{ backgroundColor: "#fff" }}></SafeAreaView>
-      <SafeAreaView edges={[]} style={{flex: 1}}>
+      <SafeAreaView edges={["bottom"]} style={{flex: 1}}>
         <AppHeader title={"Disposition"} />
         <View style={styles.container}>
           <DispositionTabs period={period} setPeriod={setPeriod} />

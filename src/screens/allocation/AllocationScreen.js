@@ -33,38 +33,38 @@ export default function AllocationScreen({ navigation }) {
   };
 
   return (
-   <>
-   <SafeAreaView edges={["top"]} style={{backgroundColor: "#fff"}}></SafeAreaView>
-   <SafeAreaView edges={[]}>
-    <AppHeader title={"Allocation"}/>
-     <View style={styles.container}>
-      <FlatList
-        data={allocations}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <AllocationCard
-            item={item}
-            onPress={() =>
-              navigation.navigate("AllocationDetails", {
-                id: item.id
-              })
+    <>
+      <SafeAreaView edges={["top"]} style={{ backgroundColor: "#fff" }}></SafeAreaView>
+      <SafeAreaView edges={["bottom"]}>
+        <AppHeader title={"Allocation"} />
+        <View style={styles.container}>
+          <FlatList
+            data={allocations}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => (
+              <AllocationCard
+                item={item}
+                onPress={() =>
+                  navigation.navigate("AllocationDetails", {
+                    id: item.id
+                  })
+                }
+              />
+            )}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+            onEndReached={loadMore}
+            onEndReachedThreshold={0.3}
+            ListEmptyComponent={
+              <Text style={{ textAlign: "center", marginTop: 40 }}>
+                No Allocations Found
+              </Text>
             }
           />
-        )}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-        onEndReached={loadMore}
-        onEndReachedThreshold={0.3}
-        ListEmptyComponent={
-          <Text style={{ textAlign: "center", marginTop: 40 }}>
-            No Allocations Found
-          </Text>
-        }
-      />
-    </View>
-   </SafeAreaView>
-   </>
+        </View>
+      </SafeAreaView>
+    </>
   );
 }
 

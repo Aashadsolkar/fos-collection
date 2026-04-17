@@ -16,53 +16,70 @@ export default function PeriodFilter({
   setCustomDate,
 }) {
   const [isPickerVisible, setPickerVisible] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
 
   const handleConfirm = date => {
     setPickerVisible(false);
-
     const formatted = dayjs(date).format("YYYY-MM-DD");
+    setSelectedDate(formatted);
     setCustomDate(formatted);
     setPeriod(null);
   };
 
-  const renderButton = (label, value) => (
-    <TouchableOpacity
-      style={[
-        styles.button,
-        period === value && styles.activeButton,
-      ]}
-      onPress={() => {
-        setPeriod(value);
-        setCustomDate(null);
-      }}
-    >
-      <Text
-        style={[
-          styles.text,
-          period === value && styles.activeText,
-        ]}
-      >
-        {label}
-      </Text>
-    </TouchableOpacity>
-  );
+  const getDateForOffset = offsetDays =>
+    dayjs().subtract(offsetDays, "day").format("YYYY-MM-DD");
+
+  const handleQuickSelect = (label, offsetDays) => {
+    const date = getDateForOffset(offsetDays);
+    setSelectedDate(date);
+    setCustomDate(date);
+    setPeriod(label);
+  };
+
+  const quickOptions = [
+    { label: "Today",              offset: 0 },
+    { label: "Yesterday",          offset: 1 },
+    { label: "Day Before Yesterday", offset: 2 },
+  ];
 
   return (
     <View style={styles.container}>
-      {renderButton("Today", "today")}
-      {renderButton("This Week", "this_week")}
-      {renderButton(
-        "This Month",
-        "this_month"
-      )}
+      {quickOptions.map(({ label, offset }) => (
+        <TouchableOpacity
+          key={label}
+          style={[
+            styles.button,
+            period === label && styles.activeButton,
+          ]}
+          onPress={() => handleQuickSelect(label, offset)}
+        >
+          <Text
+            style={[
+              styles.text,
+              period === label && styles.activeText,
+            ]}
+          >
+            {label}
+          </Text>
+        </TouchableOpacity>
+      ))}
 
-      {/* TODO */}
-      {/* <TouchableOpacity
-        style={styles.button}
+      {/* Custom Date Picker */}
+      <TouchableOpacity
+        style={[
+          styles.button,
+          period === null && selectedDate &&
+            !quickOptions.some(o => o.label === period) &&
+            styles.activeButton,
+        ]}
         onPress={() => setPickerVisible(true)}
       >
-        <Text style={styles.text}>Custom Select</Text>
-      </TouchableOpacity> */}
+        <Text style={styles.text}>
+          {period === null && selectedDate
+            ? selectedDate        // shows picked date e.g. 2026-04-06
+            : "Custom Select"}
+        </Text>
+      </TouchableOpacity>
 
       <DateTimePickerModal
         isVisible={isPickerVisible}

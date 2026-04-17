@@ -13,13 +13,16 @@ export const DashboardProvider = ({ children }) => {
     selectedDate = customDate
   ) => {
     try {
+      console.log(selectedDate, "selectedDateselectedDateselectedDate");
+      
       const res = await getDashboardSummary({
         period: selectedPeriod,
         date: selectedDate,
       });
-
+      // console.log(res.data.data.summary, "________________________");
+      
       if (res.success && res.data?.status === "success") {
-        setSummary(res.data.data.summary);
+        setSummary(res.data.data.summary); // dashboard satate (tikers) come from here
       }
     } catch (error) {
       console.log("Dashboard Error:", error);

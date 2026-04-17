@@ -364,7 +364,6 @@ const DispositionFormScreen = ({ navigation, route }) => {
 
         const payload = {
             allocation_id: data?.id,
-            process_id: 1,
             account_number: data?.account_no,
             visit_status:
                 formData.visit_status === "Non Contactable"
@@ -448,7 +447,7 @@ const DispositionFormScreen = ({ navigation, route }) => {
     return (
         <>
             <SafeAreaView edges={["top"]} style={{ backgroundColor: "#fff" }}></SafeAreaView>
-            <SafeAreaView edges={[]} style={styles.wrapper}>
+            <SafeAreaView edges={["bottom"]} style={styles.wrapper}>
                 <AppHeader title={"Disposition Form"} />
                 <KeyboardAvoidingView
                     style={{ flex: 1 }}

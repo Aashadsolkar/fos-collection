@@ -6,11 +6,14 @@ import AuthStack from "./AuthStack";
 import AppDrawer from "./AppDrawer";
 import { AuthContext } from "../context/AuthContext";
 import GlobalSnackbar from "../components/GlobalSnackbar";
+import AppInitLoader from "../components/common/AppInitialLoader";
+import { useAppInit } from "../context/AppInitialContext";
 
 const Stack = createNativeStackNavigator();
 
 export default function RootNavigator() {
   const { token, loading } = useContext(AuthContext);
+   const { appReady } = useAppInit();
 
   // =========================
   // SHOW SPLASH LOADER WHILE CHECKING TOKEN
@@ -27,6 +30,11 @@ export default function RootNavigator() {
         <ActivityIndicator size="large" />
       </View>
     );
+  }
+
+  // APP INITIALIZATION LOADER
+  if (token && !appReady) {
+    return <AppInitLoader />;
   }
 
   // =========================

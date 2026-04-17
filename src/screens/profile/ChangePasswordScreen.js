@@ -83,25 +83,11 @@ export default function ChangePasswordScreen({ navigation }) {
     );
 }
 
-const Input = ({ label, value, onChange, secure }) => {
-    return (
-        <View style={styles.inputBox}>
-            <Text style={styles.label}>{label}</Text>
-            <TextInput
-                value={value}
-                secureTextEntry={secure}
-                onChangeText={onChange}
-                style={styles.input}
-            />
-        </View>
-    );
-};
-
 const styles = StyleSheet.create({
 
     safeArea: {
         flex: 1,
-        backgroundColor: "#EFE7D5",
+        backgroundColor: "#f0f0f0",
     },
 
     container: {

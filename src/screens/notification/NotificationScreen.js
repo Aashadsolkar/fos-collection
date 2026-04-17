@@ -23,10 +23,6 @@ export default function NotificationScreen() {
 
   const [refreshing, setRefreshing] = useState(false);
 
-  useEffect(() => {
-    fetchNotifications(1);
-  }, []);
-
   const onRefresh = async () => {
     setRefreshing(true);
     await fetchNotifications(1, true);

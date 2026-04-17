@@ -3,6 +3,9 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function DispositionCard({ item, onPress }) {
+
+  console.log(item, 'customerrr');
+  
   const masked = "************" + item.account_no?.slice(-4);
 
   const getStatusStyle = () => {
@@ -19,7 +22,7 @@ export default function DispositionCard({ item, onPress }) {
   return (
     <View style={styles.card}>
       <View style={styles.rowBetween}>
-        <Text style={styles.name}>Customer Name</Text>
+        {/* <Text style={styles.name}>Customer Name</Text> // need to add customer name fromm backend */}
 
         <Text style={styles.outstanding}>
           Outstanding EMI: ₹{item.amount}

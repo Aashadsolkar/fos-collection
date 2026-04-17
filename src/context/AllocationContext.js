@@ -5,7 +5,7 @@ const AllocationContext = createContext();
 
 export const AllocationProvider = ({ children }) => {
   const [allocations, setAllocations] = useState([]);
-  const [filter, setFilter] = useState("this_month");
+  const [filter, setFilter] = useState("");
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(null);
 

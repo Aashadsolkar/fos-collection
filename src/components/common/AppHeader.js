@@ -9,6 +9,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNotification } from "../../context/NotificationContext";
+import { useProfile } from "../../context/ProfileContext";
 
 export default function AppHeader({
   type = "home", // home | page | drawer
@@ -17,6 +18,7 @@ export default function AppHeader({
 }) {
   const navigation = useNavigation();
   const { unreadCount } = useNotification();
+  const { profile } = useProfile();
 
   const renderLeft = () => {
     if (type === "home") {
@@ -26,7 +28,7 @@ export default function AppHeader({
             <View style={styles.profileCircle}>
               <Ionicons name="person" size={18} color="#fff" />
             </View>
-            <Text style={styles.name}>{userName}</Text>
+            <Text style={styles.name}>{profile?.name}</Text>
           </View>
         </TouchableOpacity>
       );
