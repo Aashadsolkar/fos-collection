@@ -8,6 +8,7 @@ import { AuthContext } from "../context/AuthContext";
 import GlobalSnackbar from "../components/GlobalSnackbar";
 import AppInitLoader from "../components/common/AppInitialLoader";
 import { useAppInit } from "../context/AppInitialContext";
+import GlobalSuccessSnackbar from "../components/GlobalSuccessSnackbar";
 
 const Stack = createNativeStackNavigator();
 
@@ -53,6 +54,7 @@ export default function RootNavigator() {
       </Stack.Navigator>
       {/* 🔥 Global Error Snackbar */}
       <GlobalSnackbar />
+      <GlobalSuccessSnackbar />
     </>
   );
 }

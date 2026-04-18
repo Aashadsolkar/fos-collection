@@ -1,23 +1,20 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { View, Text, StyleSheet, Animated } from "react-native";
-import { ErrorContext } from "../context/ErrorContext";
+import { SuccessContext } from "../context/SuccessContext";
 
-const GlobalSnackbar = () => {
-  const { error } = useContext(ErrorContext);
+const GlobalSuccessSnackbar = () => {
+  const { success } = useContext(SuccessContext);
   const slideAnim = useRef(new Animated.Value(-100)).current;
 
   useEffect(() => {
-    if (error) {
-      // Slide DOWN
+    if (success) {
       Animated.timing(slideAnim, {
         toValue: 0,
         duration: 300,
         useNativeDriver: true,
       }).start();
 
-      // Auto hide
       setTimeout(() => {
-        // Slide UP
         Animated.timing(slideAnim, {
           toValue: -100,
           duration: 300,
@@ -25,9 +22,9 @@ const GlobalSnackbar = () => {
         }).start();
       }, 2500);
     }
-  }, [error]);
+  }, [success]);
 
-  if (!error) return null;
+  if (!success) return null;
 
   return (
     <Animated.View
@@ -36,24 +33,24 @@ const GlobalSnackbar = () => {
         { transform: [{ translateY: slideAnim }] },
       ]}
     >
-      <Text style={styles.text}>{error}</Text>
+      <Text style={styles.text}>{success}</Text>
     </Animated.View>
   );
 };
 
-export default GlobalSnackbar;
+export default GlobalSuccessSnackbar;
 
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    top: 40, // 👈 top pe show hoga
+    top: 40,
     left: 20,
     right: 20,
-    backgroundColor: "#ff4d4f", // ❌ red error
+    backgroundColor: "#52c41a",
     padding: 15,
     borderRadius: 10,
     elevation: 5,
-    zIndex: 999,
+    zIndex: 999, // 👈 ensure top pe dikhe
   },
   text: {
     color: "#fff",

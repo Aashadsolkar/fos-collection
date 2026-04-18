@@ -6,9 +6,10 @@ import { apiRequest } from "./apiClient";
 export const getAllocationsApi = ({
   page = 1,
   per_page = 10,
-  period
+  period,
+  untouched,
 }) => {
-  let url = `/allocations?page=${page}&per_page=${per_page}&period=${period}`;
+  let url = `/allocations?page=${page}&per_page=${per_page}&period=${period}&untouched=${untouched}`;
 
   return apiRequest({
     method: "GET",

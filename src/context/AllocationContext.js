@@ -12,13 +12,16 @@ export const AllocationProvider = ({ children }) => {
   const fetchAllocations = async (
     selectedFilter = filter,
     pageNo = 1,
-    isRefresh = false
+    isRefresh = false,
+    untouched = 0
+    
   ) => {
     try {
       const res = await getAllocationsApi({
         page: pageNo,
         per_page: 10,
         period: selectedFilter,
+        untouched: untouched
       });
 
       const items = res?.data?.data?.items || [];
@@ -38,9 +41,9 @@ export const AllocationProvider = ({ children }) => {
     }
   };
 
-  const loadMore = () => {
+  const loadMore = (filter, untouched) => {
     if (page < lastPage) {
-      fetchAllocations(filter, page + 1);
+      fetchAllocations(filter, page + 1, false, untouched);
     }
   };
 

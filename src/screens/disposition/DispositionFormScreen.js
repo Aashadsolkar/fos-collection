@@ -1,6 +1,6 @@
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import {
     ActivityIndicator,
     Alert,
@@ -24,6 +24,8 @@ import AppInput from "../../components/form/AppInput";
 import AppHeader from "../../components/common/AppHeader";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import { sendPaymentLink } from "../../api/paymentLintApi";
+import { SuccessContext } from "../../context/SuccessContext";
 
 const visitStatusOptions = ["Contactable", "Non Contactable"];
 
@@ -161,6 +163,7 @@ const DateInput = ({ value, onChange, placeholder }) => {
 // ---------- Main Form ----------
 const DispositionFormScreen = ({ navigation, route }) => {
     const { submitDisposition, loading } = useDispositionForm();
+    const { showSuccess } = useContext(SuccessContext);
     const [formData, setFormData] = useState({
         visit_status: "",
         disposition: "",
@@ -182,6 +185,7 @@ const DispositionFormScreen = ({ navigation, route }) => {
     const scrollRef = useRef(null);
     const collectionRef = useRef(null);
     const amountRef = useRef(null);
+    const [paymentLoader, setPaymentLoader] = useState(false);
 
     const [isApiCalling, setIsApiCalling] = useState(false);
     const { data } = route.params || {};
@@ -345,13 +349,31 @@ const DispositionFormScreen = ({ navigation, route }) => {
         </View>
     );
 
-    const handleOnlineLinkClick = () => {
+    const handleOnlineLinkClick = async () => {
         if (!formData.amount) {
             Alert.alert("Error", "Please fill the Amount before proceeding!");
             return;
         }
-        const url = `https://example.com/payment?amount=${encodeURIComponent(formData.amount)}`;
-        Linking.openURL(url).catch(() => Alert.alert("Error", "Cannot open URL"));
+        try {
+            setPaymentLoader(true);
+            const payload = {
+                allocation_id: data?.id,
+                account_number: data?.account_no,
+                sms_template_id: 1,
+                mobile: "8879001686",
+                amount: formData.amount
+            }
+            console.log(payload);
+
+            const response = await sendPaymentLink(payload);
+            console.log(response);
+            showSuccess("Payment link sent successfully")
+            // open modal for send sms successfully 
+        } catch (error) {
+            console.log(error, "Something went wrong");
+        } finally {
+            setPaymentLoader(false)
+        }
     };
 
     const handleSubmit = async () => {
@@ -495,9 +517,17 @@ const DispositionFormScreen = ({ navigation, route }) => {
                                                 <TouchableOpacity
                                                     onPress={handleOnlineLinkClick}
                                                     style={styles.onlineButton}
+                                                    disabled={paymentLoader} // 👈 important
                                                 >
-                                                    <Text style={styles.onlineButtonText}>Proceed to Payment</Text>
+                                                    {paymentLoader ? (
+                                                        <ActivityIndicator color="#fff" />
+                                                    ) : (
+                                                        <Text style={styles.onlineButtonText}>
+                                                            Proceed to Payment
+                                                        </Text>
+                                                    )}
                                                 </TouchableOpacity>
+
                                             )}
 
                                             {formData.collection_type === "Cheque" && (

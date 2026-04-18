@@ -27,7 +27,7 @@ export default function DispositionDetailsScreen({ route }) {
     return (
         <>
             <SafeAreaView edges={["top"]} style={{ backgroundColor: "#FFF" }}></SafeAreaView>
-            <SafeAreaView edges={[]} style={styles.safeArea}>
+            <SafeAreaView edges={["bottom"]} style={styles.safeArea}>
                 <AppHeader title={"Disposition Details"} />
                 <ScrollView style={styles.container}>
 

@@ -16,6 +16,7 @@ import { DispositionProvider } from "../context/DispositionContext";
 import { AllocationProvider } from "../context/AllocationContext";
 import { DispositionDetailsProvider } from "../context/DispositionDetailsContext";
 import { DispositionFormProvider } from "../context/DispositionFormContext";
+import { SuccessProvider } from "../context/SuccessContext";
 
 export default function AppProviders({ children }) {
   return (
@@ -25,25 +26,29 @@ export default function AppProviders({ children }) {
           <AppInitProvider>
 
             <ErrorProvider>
-              <LoaderProvider>
-                <NetworkProvider>
+              <SuccessProvider>
 
-                  <ChangePasswordProvider>
-                    <DashboardProvider>
-                      <DispositionProvider>
-                        <AllocationProvider>
-                          <DispositionDetailsProvider>
-                            <DispositionFormProvider>
-                              {children}
-                            </DispositionFormProvider>
-                          </DispositionDetailsProvider>
-                        </AllocationProvider>
-                      </DispositionProvider>
-                    </DashboardProvider>
-                  </ChangePasswordProvider>
 
-                </NetworkProvider>
-              </LoaderProvider>
+                <LoaderProvider>
+                  <NetworkProvider>
+
+                    <ChangePasswordProvider>
+                      <DashboardProvider>
+                        <DispositionProvider>
+                          <AllocationProvider>
+                            <DispositionDetailsProvider>
+                              <DispositionFormProvider>
+                                {children}
+                              </DispositionFormProvider>
+                            </DispositionDetailsProvider>
+                          </AllocationProvider>
+                        </DispositionProvider>
+                      </DashboardProvider>
+                    </ChangePasswordProvider>
+
+                  </NetworkProvider>
+                </LoaderProvider>
+              </SuccessProvider>
             </ErrorProvider>
 
           </AppInitProvider>

@@ -23,12 +23,12 @@ export default function AllocationScreen({ navigation }) {
   const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
-    fetchAllocations(filter, 1);
+    fetchAllocations("today", 1, false , 1);
   }, [filter]);
 
   const onRefresh = async () => {
     setRefreshing(true);
-    await fetchAllocations(filter, 1, true);
+    await fetchAllocations("today", 1, true, 1);
     setRefreshing(false);
   };
 
@@ -54,7 +54,7 @@ export default function AllocationScreen({ navigation }) {
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
-            onEndReached={loadMore}
+            onEndReached={() => loadMore("today", 1)}
             onEndReachedThreshold={0.3}
             ListEmptyComponent={
               <Text style={{ textAlign: "center", marginTop: 40 }}>

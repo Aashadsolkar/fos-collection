@@ -11,7 +11,7 @@ export default function StatsGrid({ summary, date }) {
     {
       label: "Untouched Data",
       value: summary.untouched_allocations,
-      onPress: () => navigation.navigate("Allocation")
+      onPress: () => navigation.navigate("UnTouchedAllocation")
     },
     {
       label: `${date}'s Disposition`,

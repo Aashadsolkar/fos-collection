@@ -9,6 +9,7 @@ import DispositionFormScreen from "../screens/disposition/DispositionFormScreen"
 import NotificationScreen from "../screens/notification/NotificationScreen";
 import ChangePasswordScreen from "../screens/profile/ChangePasswordScreen";
 import CustomDrawerContent from "../components/CustomDrawerContent";
+import UnTouchedAllocation from "../screens/allocation/UnTouchedAllocation";
 
 const Drawer = createDrawerNavigator();
 
@@ -53,6 +54,11 @@ export default function AppDrawer() {
       <Drawer.Screen
         name="Notifications"
         component={NotificationScreen}
+        options={{ drawerItemStyle: { display: "none" } }}
+      />
+      <Drawer.Screen
+        name="UnTouchedAllocation"
+        component={UnTouchedAllocation}
         options={{ drawerItemStyle: { display: "none" } }}
       />
     </Drawer.Navigator>
