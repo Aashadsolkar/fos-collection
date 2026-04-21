@@ -363,10 +363,8 @@ const DispositionFormScreen = ({ navigation, route }) => {
                 mobile: "8879001686",
                 amount: formData.amount
             }
-            console.log(payload);
 
             const response = await sendPaymentLink(payload);
-            console.log(response);
             showSuccess("Payment link sent successfully")
             // open modal for send sms successfully 
         } catch (error) {

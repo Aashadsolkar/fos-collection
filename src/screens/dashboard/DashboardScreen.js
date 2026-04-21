@@ -27,7 +27,6 @@ export default function DashboardScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
 
-  console.log(summary, "_________________________)0000");
   
 
   useEffect(() => {

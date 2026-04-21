@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
 
   activeLabel: {
     color: "#000",
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: "600",
   },
 });

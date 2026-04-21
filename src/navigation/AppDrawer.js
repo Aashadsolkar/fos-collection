@@ -49,12 +49,12 @@ export default function AppDrawer() {
       <Drawer.Screen
         name="ChangePassword"
         component={ChangePasswordScreen}
-        options={{ drawerItemStyle: { display: "none" } }}
+        // options={{ drawerItemStyle: { display: "" } }}
       />
       <Drawer.Screen
         name="Notifications"
         component={NotificationScreen}
-        options={{ drawerItemStyle: { display: "none" } }}
+        // options={{ drawerItemStyle: { display: "none" } }}
       />
       <Drawer.Screen
         name="UnTouchedAllocation"

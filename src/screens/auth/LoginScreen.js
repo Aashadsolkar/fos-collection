@@ -1,3 +1,5 @@
+// screens/auth/LoginScreen.js
+
 import React, { useState } from "react";
 import {
   View,
@@ -10,20 +12,19 @@ import {
 import AppInput from "../../components/form/AppInput";
 import { useAuth } from "../../hooks/auth/useAuth";
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
   const { login } = useAuth();
 
-  const [employeeCode, setEmployeeCode] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [secure, setSecure] = useState(true);
-
   const [errors, setErrors] = useState({});
 
   const validate = () => {
     let newErrors = {};
 
-    if (!employeeCode.trim()) {
-      newErrors.employeeCode = "Employee ID is required";
+    if (!username.trim()) {
+      newErrors.username = "Username is required";
     }
 
     if (!password.trim()) {
@@ -39,11 +40,13 @@ export default function LoginScreen() {
   const handleLogin = async () => {
     if (!validate()) return;
 
-    const res = await login(employeeCode, password);
+    const res = await login(username, password);
 
-    if (!res.success) {
-      // Snackbar already handled globally
+    if (res.success) {
+      // Checksum ke saath PasscodeScreen pe navigate karo
+      navigation.navigate("Passcode", { checksum: res.checksum });
     }
+    // Failure case: Snackbar globally handled hai
   };
 
   return (
@@ -53,21 +56,19 @@ export default function LoginScreen() {
     >
       <View style={styles.logoContainer}>
         <Text style={styles.logoText}>
-          <Text style={{ color: "#f4c400" }}>Fin</Text>Sure
+          <Text style={{ color: "#f4c400" }}>Collection</Text>Module
         </Text>
       </View>
 
       <View>
         <AppInput
-          // label="Employee ID"
-          value={employeeCode}
-          onChangeText={setEmployeeCode}
-          placeholder="Enter Employee ID"
-          error={errors.employeeCode}
+          value={username}
+          onChangeText={setUsername}
+          placeholder="Enter Username"
+          error={errors.username}
         />
 
         <AppInput
-          // label="Password"
           value={password}
           onChangeText={setPassword}
           placeholder="Enter Password"

@@ -19,7 +19,7 @@ export default function CustomDrawerContent(props) {
         <SafeAreaView edges={["bottom",]} style={styles.container}>
             {/* Top Section */}
             <View style={styles.header}>
-                <Text style={styles.title}>FOS</Text>
+                <Text style={styles.title}>Collection Module</Text>
             </View>
 
             {/* Drawer Items */}

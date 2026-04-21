@@ -3,14 +3,26 @@ import { apiRequest } from "./apiClient";
 // ===============================
 // LOGIN API
 // ===============================
-export const loginApi = (employee_code, password) => {
+export const loginNewApi = (username, password) => {
   return apiRequest({
     method: "POST",
-    url: "/auth/login",
+    url: "/auth/loginnew",
     data: {
-      employee_code,
+      username,
       password,
     },
+    showLoader: true, // optional (default true)
+  });
+};
+
+// ===============================
+// LOGIN API
+// ===============================
+export const verifyNewApi = (checksum, passcode) => {
+  return apiRequest({
+    method: "POST",
+    url: "/auth/verifynew",
+    data: { checksum, passcode },
     showLoader: true, // optional (default true)
   });
 };

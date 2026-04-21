@@ -9,15 +9,12 @@ export const ProfileProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   const fetchProfile = async () => {
-    console.log("___api calld");
     
     try {
 
       setLoading(true);
 
       const res = await getProfileApi();
-
-      console.log(res, "__)))_____________________");
       if (res?.data?.status === "success") {
         
         setProfile(res.data?.data);

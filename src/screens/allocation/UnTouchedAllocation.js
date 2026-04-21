@@ -1,3 +1,8 @@
+
+
+// Over all unthouched allocation shown here 
+// No filter apply here for date
+
 import React, { useEffect, useState } from "react";
 import {
     View,
@@ -23,12 +28,12 @@ export default function UnTouchedAllocation({ navigation }) {
     const [refreshing, setRefreshing] = useState(false);
 
     useEffect(() => {
-        fetchAllocations("", 1, false, 0);
+        fetchAllocations("", 1, false, 1);
     }, [filter]);
 
     const onRefresh = async () => {
         setRefreshing(true);
-        await fetchAllocations("", 1, true, 0);
+        await fetchAllocations("", 1, true, 1);
         setRefreshing(false);
     };
 
@@ -57,7 +62,7 @@ export default function UnTouchedAllocation({ navigation }) {
                         refreshControl={
                             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
                         }
-                        onEndReached={() => loadMore("", 0)}
+                        onEndReached={() => loadMore("", 1)}
                         onEndReachedThreshold={0.3}
                         ListEmptyComponent={
                             <Text style={{ textAlign: "center", marginTop: 40 }}>

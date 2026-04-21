@@ -1,6 +1,7 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "../screens/auth/LoginScreen";
+import PasscodeScreen from "../screens/auth/Passcodescreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -10,6 +11,10 @@ export default function AuthStack() {
       <Stack.Screen 
         name="Login" 
         component={LoginScreen} 
+      />
+       <Stack.Screen 
+        name="Passcode" 
+        component={PasscodeScreen} 
       />
     </Stack.Navigator>
   );

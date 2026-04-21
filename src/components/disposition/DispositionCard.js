@@ -4,7 +4,6 @@ import { Ionicons } from "@expo/vector-icons";
 
 export default function DispositionCard({ item, onPress }) {
 
-  console.log(item, 'customerrr');
   
   const masked = "************" + item.account_no?.slice(-4);
 
