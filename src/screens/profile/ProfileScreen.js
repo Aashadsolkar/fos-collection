@@ -40,11 +40,11 @@ export default function ProfileScreen({ navigation }) {
 
           <View style={styles.menuContainer}>
 
-            <MenuItem
+            {/* <MenuItem
               icon="settings-outline"
               title="Settings"
               onPress={() => navigation.navigate("Settings")}
-            />
+            /> */}
 
             <MenuItem
               icon="notifications-outline"
@@ -55,19 +55,19 @@ export default function ProfileScreen({ navigation }) {
             <MenuItem
               icon="calculator-outline"
               title="Emi Calculator"
-              onPress={() => navigation.navigate("EmiCalculator")}
+              onPress={() => navigation.navigate("EmiCalculatorScreen")}
             />
 
             <MenuItem
               icon="help-circle-outline"
               title="Help & Support"
-              onPress={() => navigation.navigate("Help")}
+              onPress={() => navigation.navigate("HelpSupportScreen")}
             />
 
             <MenuItem
               icon="document-text-outline"
               title="Terms & Conditions"
-              onPress={() => navigation.navigate("Terms")}
+              onPress={() => navigation.navigate("TermsConditionsScreen")}
             />
 
             <MenuItem

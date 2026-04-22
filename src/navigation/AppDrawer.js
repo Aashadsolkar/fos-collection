@@ -10,6 +10,9 @@ import NotificationScreen from "../screens/notification/NotificationScreen";
 import ChangePasswordScreen from "../screens/profile/ChangePasswordScreen";
 import CustomDrawerContent from "../components/CustomDrawerContent";
 import UnTouchedAllocation from "../screens/allocation/UnTouchedAllocation";
+import HelpSupportScreen from "../screens/HelpSupportScreen";
+import TermsConditionsScreen from "../screens/TermsConditionsScreen";
+import EmiCalculatorScreen from "../screens/EmiCalculatorScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -59,6 +62,21 @@ export default function AppDrawer() {
       <Drawer.Screen
         name="UnTouchedAllocation"
         component={UnTouchedAllocation}
+        options={{ drawerItemStyle: { display: "none" } }}
+      />
+      <Drawer.Screen
+        name="HelpSupportScreen"
+        component={HelpSupportScreen}
+        options={{ drawerItemStyle: { display: "none" } }}
+      />
+      <Drawer.Screen
+        name="TermsConditionsScreen"
+        component={TermsConditionsScreen}
+        options={{ drawerItemStyle: { display: "none" } }}
+      />
+      <Drawer.Screen
+        name="EmiCalculatorScreen"
+        component={EmiCalculatorScreen}
         options={{ drawerItemStyle: { display: "none" } }}
       />
     </Drawer.Navigator>
