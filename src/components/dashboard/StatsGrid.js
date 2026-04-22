@@ -26,7 +26,7 @@ export default function StatsGrid({ summary, date }) {
     {
       label: "Total Disposition",
       value: summary.total_dispositions,
-      onPress: () => navigation.navigate("Allocation")
+      onPress: () => navigation.navigate("Disposition")
     },
   ];
 

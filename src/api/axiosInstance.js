@@ -47,29 +47,21 @@ axiosInstance.interceptors.response.use(
     if (response.config.showLoader !== false) {
       triggerLoaderStop();
     }
-    console.log(response, "_______________");
     
     return response;
   },
   async (error) => {
-     console.log("log 1")
     if (error.config?.showLoader !== false) {
-       console.log("log 2")
       triggerLoaderStop();
     }
     
     if (error.response?.status === 401) {
       triggerLogout();
-       console.log("log 3")
-       console.log(error.response,"log 3")
     } else {
-       console.log("log 4")
       const message =
       error.response?.data?.message || "Something went wrong";
       triggerError(message);
-       console.log("log 5")
     }
- console.log("log 6")
     return Promise.reject(error);
   }
 );

@@ -35,6 +35,26 @@ export default function AllocationDetailsScreen({ navigation, route }) {
     }
   }
 
+  const renderHistory = () => {
+    if (history.length > 0) {
+      return <>
+        <Text style={styles.historyTitle}>Previous History</Text>
+        {history.map((item) => (
+          <View key={item.id} style={styles.historyCard}>
+            <Text style={styles.historyText}>
+              🕒 {item.created_at}
+            </Text>
+
+            <Text style={styles.historyText}>
+              Called customer - {item.visit_status}
+            </Text>
+
+          </View>
+        ))}
+      </>
+    }
+  }
+
   if (!data) return null
 
   const payload = data.payload
@@ -45,7 +65,7 @@ export default function AllocationDetailsScreen({ navigation, route }) {
   return (
     <>
       <SafeAreaView edges={["top"]} style={{ backgroundColor: "#FFF" }}></SafeAreaView>
-      <SafeAreaView edges={[]} style={styles.safeArea}>
+      <SafeAreaView edges={["bottom"]} style={styles.safeArea}>
         <AppHeader title={"Allocation Detail"} showBack={true} />
         <ScrollView style={styles.container}>
 
@@ -137,28 +157,14 @@ export default function AllocationDetailsScreen({ navigation, route }) {
 
           {/* HISTORY */}
 
-          <Text style={styles.historyTitle}>Previous History</Text>
-
-          {history.map((item) => (
-            <View key={item.id} style={styles.historyCard}>
-
-              <Text style={styles.historyText}>
-                🕒 {item.created_at}
-              </Text>
-
-              <Text style={styles.historyText}>
-                Called customer - {item.visit_status}
-              </Text>
-
-            </View>
-          ))}
+          {renderHistory()}
 
 
           {/* BUTTON */}
 
-          <TouchableOpacity onPress={() => navigation.navigate("DispositionForm", { data : data})} style={styles.feedbackBtn}>
+          <TouchableOpacity onPress={() => navigation.navigate("DispositionForm", { data: data })} style={styles.feedbackBtn}>
             <Text style={styles.feedbackText}>
-              💬 Give Feedback
+              Give Feedback
             </Text>
           </TouchableOpacity>
 
