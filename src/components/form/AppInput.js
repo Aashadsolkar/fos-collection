@@ -38,7 +38,7 @@ export default function AppInput({
             <Ionicons
               name={secureTextEntry ? "eye-off-outline" : "eye-outline"}
               size={20}
-              color="#333"
+              color="#000"
             />
           </TouchableOpacity>
         )}
@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
+    color: "#000"
   },
   errorBorder: {
     borderWidth: 1,

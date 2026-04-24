@@ -47,14 +47,14 @@ export default function UnTouchedAllocation({ navigation }) {
     loadMore("", 1);
   };
 
+  const isEmpty = !allocations || allocations.length === 0;
+
   return (
     <>
-      {/* Top Safe Area */}
       <SafeAreaView style={styles.topSafeArea} edges={["top"]} />
 
-      {/* Main Area */}
       <SafeAreaView style={styles.safeArea} edges={["bottom"]}>
-        <AppHeader title={"Allocation"} />
+        <AppHeader title="Allocation" />
 
         {/* Heading */}
         <View style={styles.headingContainer}>
@@ -63,37 +63,39 @@ export default function UnTouchedAllocation({ navigation }) {
 
         {/* List */}
         <View style={styles.container}>
-          <FlatList
-            data={allocations}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-              <AllocationCard
-                item={item}
-                onPress={() =>
-                  navigation.navigate("AllocationDetails", {
-                    id: item.id,
-                  })
-                }
-              />
-            )}
-            showsVerticalScrollIndicator={false}
-            refreshControl={
-              <RefreshControl
-                refreshing={refreshing}
-                onRefresh={onRefresh}
-              />
-            }
-            onEndReached={handleLoadMore}
-            onEndReachedThreshold={0.3}
-            ListEmptyComponent={
-              <Text style={styles.emptyText}>
-                No Allocations Found
-              </Text>
-            }
-            contentContainerStyle={
-              allocations?.length === 0 && styles.emptyContainer
-            }
-          />
+          {isEmpty ? (
+            // ✅ Empty state — always perfectly centered
+            <View style={styles.emptyWrapper}>
+              <Text style={styles.emptyIcon}>📋</Text>
+              <Text style={styles.emptyTitle}>No Allocations Found</Text>
+              <Text style={styles.emptySubtitle}>Pull down to refresh</Text>
+            </View>
+          ) : (
+            <FlatList
+              data={allocations}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => (
+                <AllocationCard
+                  item={item}
+                  onPress={() =>
+                    navigation.navigate("AllocationDetails", { id: item.id })
+                  }
+                />
+              )}
+              showsVerticalScrollIndicator={false}
+              refreshControl={
+                <RefreshControl
+                  refreshing={refreshing}
+                  onRefresh={onRefresh}
+                  tintColor="#22C55E"
+                  colors={["#22C55E"]}
+                />
+              }
+              onEndReached={handleLoadMore}
+              onEndReachedThreshold={0.3}
+              contentContainerStyle={{ paddingBottom: 16 }}
+            />
+          )}
         </View>
       </SafeAreaView>
     </>
@@ -102,34 +104,58 @@ export default function UnTouchedAllocation({ navigation }) {
 
 const styles = StyleSheet.create({
   topSafeArea: {
-    backgroundColor: "#fff",
+    backgroundColor: "#F5F9F6",
   },
+
   safeArea: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#F5F9F6",
   },
+
+  headingContainer: {
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: "#D1E8D8",
+    backgroundColor: "#FFFFFF",
+  },
+
+  headingText: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#0A1F10",
+    letterSpacing: 0.2,
+  },
+
   container: {
     flex: 1,
     paddingHorizontal: 16,
-    backgroundColor: "#f5f5f5",
+    paddingTop: 12,
+    backgroundColor: "#F5F9F6",
   },
-  headingContainer: {
-    marginVertical: 12,
-    paddingHorizontal: 16,
-  },
-  headingText: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: "#222",
-  },
-  emptyText: {
-    textAlign: "center",
-    fontSize: 16,
-    color: "#777",
-  },
-  emptyContainer: {
+
+  // ✅ Empty state
+  emptyWrapper: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+
+  emptyIcon: {
+    fontSize: 44,
+    marginBottom: 12,
+  },
+
+  emptyTitle: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#0A1F10",
+    marginBottom: 4,
+  },
+
+  emptySubtitle: {
+    fontSize: 13,
+    color: "#6B9E7A",
+    fontWeight: "500",
   },
 });

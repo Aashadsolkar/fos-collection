@@ -55,7 +55,8 @@ axiosInstance.interceptors.response.use(
       triggerLoaderStop();
     }
     
-    if (error.response?.status === 401) {
+    if (error.response?.status === 401 && error.response?.data?.message == "Unauthenticated") {
+      console.log(error.response?.data);
       triggerLogout();
     } else {
       const message =

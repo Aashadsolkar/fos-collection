@@ -47,47 +47,55 @@ export default function AllocationScreen({ navigation }) {
     loadMore("today", 1);
   };
 
+  const isEmpty = !allocations || allocations.length === 0;
+
   return (
     <>
-      {/* Top Safe Area */}
       <SafeAreaView edges={["top"]} style={styles.topSafeArea} />
 
-      {/* Main Content */}
       <SafeAreaView edges={["bottom"]} style={styles.safeArea}>
-        <AppHeader title={"Allocation"} />
+        <AppHeader title="Allocation" />
 
         <View style={styles.container}>
-          <FlatList
-            data={allocations}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-              <AllocationCard
-                item={item}
-                onPress={() =>
-                  navigation.navigate("AllocationDetails", {
-                    id: item.id,
-                  })
-                }
-              />
-            )}
-            showsVerticalScrollIndicator={false}
-            refreshControl={
+          {isEmpty ? (
+            // ✅ Empty state — FlatList se bahar, pure View mein
+            <View style={styles.emptyWrapper}>
               <RefreshControl
                 refreshing={refreshing}
                 onRefresh={onRefresh}
+                tintColor="#22C55E"
+                colors={["#22C55E"]}
               />
-            }
-            onEndReached={handleLoadMore}
-            onEndReachedThreshold={0.3}
-            ListEmptyComponent={
-              <Text style={styles.emptyText}>
-                No Allocations Found
-              </Text>
-            }
-            contentContainerStyle={
-              allocations?.length === 0 && styles.emptyContainer
-            }
-          />
+              <Text style={styles.emptyIcon}>📋</Text>
+              <Text style={styles.emptyTitle}>No Allocations Available Today</Text>
+              {/* <Text style={styles.emptySubtitle}>Pull down to refresh</Text> */}
+            </View>
+          ) : (
+            <FlatList
+              data={allocations}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => (
+                <AllocationCard
+                  item={item}
+                  onPress={() =>
+                    navigation.navigate("AllocationDetails", { id: item.id })
+                  }
+                />
+              )}
+              showsVerticalScrollIndicator={false}
+              refreshControl={
+                <RefreshControl
+                  refreshing={refreshing}
+                  onRefresh={onRefresh}
+                  tintColor="#22C55E"
+                  colors={["#22C55E"]}
+                />
+              }
+              onEndReached={handleLoadMore}
+              onEndReachedThreshold={0.3}
+              contentContainerStyle={{ paddingBottom: 16 }}
+            />
+          )}
         </View>
       </SafeAreaView>
     </>
@@ -96,25 +104,42 @@ export default function AllocationScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   topSafeArea: {
-    backgroundColor: "#fff",
+    backgroundColor: "#F5F9F6",
   },
+
   safeArea: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#F5F9F6",
   },
+
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#F5F9F6",
   },
-  emptyText: {
-    textAlign: "center",
-    fontSize: 16,
-    color: "#777",
-  },
-  emptyContainer: {
+
+  // ✅ Empty state — always perfectly centered
+  emptyWrapper: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+
+  emptyIcon: {
+    fontSize: 44,
+    marginBottom: 12,
+  },
+
+  emptyTitle: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#0A1F10",
+    marginBottom: 4,
+  },
+
+  emptySubtitle: {
+    fontSize: 13,
+    color: "#6B9E7A",
+    fontWeight: "500",
   },
 });

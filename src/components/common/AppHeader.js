@@ -23,10 +23,10 @@ export default function AppHeader({
   const renderLeft = () => {
     if (type === "home") {
       return (
-        <TouchableOpacity onPress={() => navigation.openDrawer()}>
+        <TouchableOpacity>
           <View style={styles.profileWrap}>
             <View style={styles.profileCircle}>
-              <Ionicons name="person" size={18} color="#fff" />
+              <Ionicons name="person" size={18} color="#FFFFFF" />
             </View>
             <Text style={styles.name}>{profile?.name}</Text>
           </View>
@@ -36,15 +36,19 @@ export default function AppHeader({
 
     if (type === "drawer") {
       return (
-        <TouchableOpacity onPress={() => navigation.openDrawer()}>
-          <Ionicons name="menu" size={24} />
+        <TouchableOpacity>
+          <Ionicons name="menu" size={24} color="#0A1F10" />
         </TouchableOpacity>
       );
     }
 
     return (
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Ionicons name="arrow-back" size={24} />
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        style={styles.backBtn}
+        activeOpacity={0.7}
+      >
+        <Ionicons name="arrow-back" size={20} color="#0A1F10" />
       </TouchableOpacity>
     );
   };
@@ -60,8 +64,9 @@ export default function AppHeader({
         <TouchableOpacity
           onPress={() => navigation.navigate("Notifications")}
           style={styles.bellWrap}
+          activeOpacity={0.7}
         >
-          <Ionicons name="notifications-outline" size={24} />
+          <Ionicons name="notifications-outline" size={24} color="#0A1F10" />
 
           {unreadCount > 0 && (
             <View style={styles.badge}>
@@ -81,9 +86,7 @@ export default function AppHeader({
     <SafeAreaView edges={[]} style={styles.safe}>
       <View style={styles.container}>
         <View style={styles.left}>{renderLeft()}</View>
-
         <View style={styles.center}>{renderTitle()}</View>
-
         <View style={styles.right}>{renderRight()}</View>
       </View>
     </SafeAreaView>
@@ -92,17 +95,18 @@ export default function AppHeader({
 
 const styles = StyleSheet.create({
   safe: {
-    backgroundColor: "#fff",
+    backgroundColor: "#FFFFFF",
   },
+
   container: {
     height: 70,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 16,
-    borderBottomWidth: 0.5,
-    borderColor: "#eee",
-    backgroundColor: "#fff",
+    borderBottomWidth: 1,
+    borderColor: "#D1E8D8",
+    backgroundColor: "#FFFFFF",
   },
 
   left: {
@@ -121,49 +125,81 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: "700",
+    color: "#0A1F10",
+    letterSpacing: 0.2,
   },
 
+  // Home type — profile pill
   profileWrap: {
     flexDirection: "row",
     alignItems: "center",
   },
 
   profileCircle: {
-    width: 34,
-    height: 34,
-    borderRadius: 17,
-    backgroundColor: "#F4B400",
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: "#22C55E",
     justifyContent: "center",
     alignItems: "center",
     marginRight: 8,
+    shadowColor: "#22C55E",
+    shadowOpacity: 0.25,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 3,
   },
 
   name: {
     fontSize: 15,
     fontWeight: "600",
+    color: "#0A1F10",
   },
 
+  // Page type — back button
+  backBtn: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    backgroundColor: "#EDFAF3",
+    borderWidth: 1,
+    borderColor: "#C8E0D0",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  // Notification bell
   bellWrap: {
     position: "relative",
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    backgroundColor: "#EDFAF3",
+    borderWidth: 1,
+    borderColor: "#C8E0D0",
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   badge: {
     position: "absolute",
     top: -4,
     right: -4,
-    backgroundColor: "#F4B400",
+    backgroundColor: "#22C55E",
     borderRadius: 10,
     minWidth: 16,
     height: 16,
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 3,
+    borderWidth: 1.5,
+    borderColor: "#FFFFFF",
   },
 
   badgeText: {
-    color: "#fff",
+    color: "#FFFFFF",
     fontSize: 9,
     fontWeight: "700",
   },

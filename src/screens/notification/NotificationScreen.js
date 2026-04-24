@@ -9,7 +9,6 @@ import {
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import AppHeader from "../../components/common/AppHeader";
-
 import NotificationCard from "../../components/notification/NotificationCard";
 import { useNotification } from "../../context/NotificationContext";
 
@@ -31,16 +30,15 @@ export default function NotificationScreen() {
 
   return (
     <>
-      <SafeAreaView edges={["top"]} style={{ backgroundColor: "#fff" }} />
+      <SafeAreaView edges={["top"]} style={{ backgroundColor: "#F5F9F6" }} />
 
-      <SafeAreaView edges={[]} style={{ flex: 1 }}>
-        <AppHeader  title={"Notifications"} />
+      <SafeAreaView edges={[]} style={{ flex: 1, backgroundColor: "#F5F9F6" }}>
+        <AppHeader title="Notifications" />
 
         <View style={styles.container}>
-
           <FlatList
             data={items}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(item, index) => `${item.id}_${index}`}
 
             renderItem={({ item }) => (
               <NotificationCard item={item} />
@@ -50,6 +48,8 @@ export default function NotificationScreen() {
               <RefreshControl
                 refreshing={refreshing}
                 onRefresh={onRefresh}
+                tintColor="#22C55E"
+                colors={["#22C55E"]}
               />
             }
 
@@ -57,12 +57,13 @@ export default function NotificationScreen() {
             onEndReachedThreshold={0.3}
 
             ListEmptyComponent={
-              <Text style={styles.empty}>
-                No Notifications
-              </Text>
+              <View style={styles.emptyContainer}>
+                <Text style={styles.emptyIcon}>🔔</Text>
+                <Text style={styles.emptyTitle}>No Notifications</Text>
+                <Text style={styles.emptySubtitle}>You're all caught up!</Text>
+              </View>
             }
           />
-
         </View>
 
       </SafeAreaView>
@@ -75,12 +76,30 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: "#EFE7D5",
+    backgroundColor: "#F5F9F6",
   },
 
-  empty: {
-    textAlign: "center",
-    marginTop: 40,
+  emptyContainer: {
+    alignItems: "center",
+    marginTop: 80,
+  },
+
+  emptyIcon: {
+    fontSize: 40,
+    marginBottom: 12,
+  },
+
+  emptyTitle: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#0A1F10",
+    marginBottom: 4,
+  },
+
+  emptySubtitle: {
+    fontSize: 13,
+    color: "#6B9E7A",
+    fontWeight: "500",
   },
 
 });

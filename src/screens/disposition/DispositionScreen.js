@@ -91,7 +91,7 @@ export default function DispositionScreen({ navigation }) {
               </Text>
             }
             contentContainerStyle={
-              items?.length === 0 && styles.emptyContainer
+              items?.length === 0 ? styles.emptyContainer : styles.listStyle
             }
           />
         </View>
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 16,
-    backgroundColor: "#EFE7D5",
+    backgroundColor: "#fff",
   },
   emptyText: {
     textAlign: "center",
@@ -123,4 +123,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  listStyle:{
+    paddingBottom: 120
+  }
 });

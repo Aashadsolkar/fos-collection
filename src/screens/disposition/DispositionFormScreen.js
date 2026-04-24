@@ -1,6 +1,6 @@
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import {
     ActivityIndicator,
     Alert,
@@ -26,6 +26,7 @@ import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { sendPaymentLink } from "../../api/paymentLintApi";
 import { SuccessContext } from "../../context/SuccessContext";
+import { useFocusEffect } from "@react-navigation/native";
 
 const visitStatusOptions = ["Contactable", "Non Contactable"];
 
@@ -194,6 +195,33 @@ const DispositionFormScreen = ({ navigation, route }) => {
         setFormData((prev) => ({ ...prev, [key]: value }));
         if (errors.includes(key)) setErrors((prev) => prev.filter((e) => e !== key));
     };
+
+    const getInitialFormState = () => ({
+    visit_status: "",
+    disposition: "",
+    collection_type: "",
+    amount: "",
+    cheque_no: "",
+    bank_name: "",
+    cheque_date: "",
+    receipt_no: "",
+    transcation_id: "",
+    followup_date: "",
+    alt_mobile_no: "",
+    alt_email_id: "",
+    alt_address: "",
+    remarks: "",
+});
+
+useFocusEffect(
+    useCallback(() => {
+        setFormData(getInitialFormState());
+        setErrors([]);
+        setImage(null);
+        setPaymentLoader(false);
+        setIsApiCalling(false);
+    }, [])
+);
 
     useEffect(() => {
         const options = collectionTypeOptions[formData.disposition];
@@ -374,6 +402,9 @@ const DispositionFormScreen = ({ navigation, route }) => {
         }
     };
 
+    console.log(data?.id, "allocation  iddd");
+    
+
     const handleSubmit = async () => {
         const missing = requiredFields.filter((field) => !formData[field]);
 
@@ -437,6 +468,9 @@ const DispositionFormScreen = ({ navigation, route }) => {
         const formDataToSend = new FormData();
 
         // normal fields
+
+        console.log(payload, "___________________");
+        
         Object.keys(payload).forEach((key) => {
             formDataToSend.append(key, payload[key]);
         });
@@ -682,7 +716,7 @@ const styles = StyleSheet.create({
     optionSelected: { backgroundColor: "#E8F0FE", borderColor: "#007AFF" },
     optionText: { fontSize: 15, color: "#333" },
     optionTextSelected: { color: "#007AFF", fontWeight: "600" },
-    submitBtn: { backgroundColor: "#ecba31", padding: 16, borderRadius: 12, marginTop: 10 },
+    submitBtn: { backgroundColor: "#22C55E", padding: 16, borderRadius: 12, marginTop: 10 },
     submitText: { color: "#000", textAlign: "center", fontWeight: "700", fontSize: 16 },
     onlineButton: {
         marginTop: 0,

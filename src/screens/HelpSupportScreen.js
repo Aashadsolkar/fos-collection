@@ -71,7 +71,7 @@ export default function HelpSupportScreen() {
             </View>
 
             {/* 🔹 Message Form */}
-            <Text style={styles.sectionTitle}>Send Message</Text>
+            {/* <Text style={styles.sectionTitle}>Send Message</Text>
 
             <View style={styles.card}>
               <TextInput
@@ -85,7 +85,7 @@ export default function HelpSupportScreen() {
               <TouchableOpacity style={styles.button}>
                 <Text style={styles.buttonText}>Submit</Text>
               </TouchableOpacity>
-            </View>
+            </View> */}
           </ScrollView>
         </View>
       </SafeAreaView>

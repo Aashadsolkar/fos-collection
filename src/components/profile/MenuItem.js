@@ -12,7 +12,7 @@ const MenuItem = ({ icon, title, onPress, logout }) => {
     <TouchableOpacity style={styles.menuItem} onPress={onPress}>
 
       <View style={styles.menuLeft}>
-        <Ionicons name={icon} size={22} color="#E6B800" />
+        <Ionicons name={icon} size={22} color="#22C55E" />
 
         <Text style={[styles.menuText, logout && { color: "red" }]}>
           {title}

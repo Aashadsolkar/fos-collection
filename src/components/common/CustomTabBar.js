@@ -1,3 +1,5 @@
+// components/navigation/CustomTabBar.js
+
 import React, { useEffect } from "react";
 import {
   View,
@@ -65,7 +67,7 @@ export default function CustomTabBar({ state, navigation, tabs }) {
             <Ionicons
               name={focused ? tab.activeIcon : tab.icon}
               size={isBig ? 30 : 24}
-              color={focused ? "#000" : "#888"}
+              color={focused ? "#FFFFFF" : "#6B9E7A"}
             />
 
             <Text
@@ -91,15 +93,17 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 10,
     height: 75,
-    backgroundColor: "#fff",
-    borderRadius: 14,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 20,
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 6 },
+    borderWidth: 1,
+    borderColor: "#D1E8D8",
+    shadowColor: "#22C55E",
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.1,
-    shadowRadius: 8,
+    shadowRadius: 16,
     elevation: 8,
     overflow: "hidden",
   },
@@ -108,9 +112,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 0,
     top: 0,
-    height: 65,
-    backgroundColor: "#ffb300a8",
-    borderRadius: 12,
+    height: "100%",
+    backgroundColor: "#22C55E",
+    borderRadius: 18,
     zIndex: 0,
   },
 
@@ -125,7 +129,7 @@ const styles = StyleSheet.create({
     marginTop: 2,
     fontSize: 11,
     fontWeight: "500",
-    color: "#888",
+    color: "#6B9E7A",
   },
 
   bigLabel: {
@@ -133,8 +137,8 @@ const styles = StyleSheet.create({
   },
 
   activeLabel: {
-    color: "#000",
+    color: "#FFFFFF",
     fontSize: 12,
-    fontWeight: "600",
+    fontWeight: "700",
   },
 });

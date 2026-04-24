@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   },
   button: {
     borderWidth: 1,
-    borderColor: "#F4C400",
+    borderColor: "#22C55E",
     borderRadius: 8,
     paddingVertical: 6,
     paddingHorizontal: 10,
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   activeButton: {
-    backgroundColor: "#F4C400",
+    backgroundColor: "#22C55E",
   },
   text: {
     fontSize: 13,
